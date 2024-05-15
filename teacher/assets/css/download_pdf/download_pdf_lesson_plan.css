@@ -1,0 +1,155 @@
+html,body{
+	color:black;
+}
+.empty-header, .empty-footer {
+	height:100px
+}
+.header {
+	position: fixed;
+	height:100px;
+	top: 0;
+}
+.content {
+	font-size:11px !important;
+}
+table td {
+    font-size: 11px;
+}
+.footer {
+	display:block;
+	padding-top:20px;
+	position: fixed;
+	height:100px;
+	width:110vw;
+	bottom:0;
+	background-color: #FFFFFF;
+	font-size:8px;
+}
+@media screen {
+	.footer {
+		display:none;
+	}
+}
+@media print {
+	html {
+        overflow: visible !important;
+    }
+	html,body{
+		background-image: none;
+	}
+	.footer {
+		display:none;
+	}
+	.div_begin{
+		page-break-inside: auto;
+	}
+	#action-area {
+		display: none;
+	}
+	html {
+        overflow: visible !important;
+    }
+	.table th { 
+        background-color: rgb(240, 235, 225)  !important; 
+    }
+	.table td{
+		padding-top:0.5%;
+		padding-bottom:0px;
+	}
+	body { 
+		counter-reset: page; 
+	}
+	.signature-space{
+		padding-top:150px;
+		margin-top:15px;
+        margin-right:0px;
+        margin-left:0px;
+	}
+	.signature-row{
+		page-break-inside: avoid;
+		/* break-before: page; */
+	}
+	.whole-table{
+		width:100%;
+	}
+}
+.table td, .table th {
+	color:black;
+    vertical-align: top!important;
+}
+.table{
+	table-layout: fixed;
+}
+table { 
+	margin:0 !important;
+	page-break-inside:avoid;
+	-webkit-print-color-adjust: exact; 
+	print-color-adjust: exact;
+}
+tr    {
+	page-break-inside:avoid; 
+	page-break-after:auto;
+}
+.table th{
+	font-weight: 600;
+	font-size:13px;
+	padding-top: 0px;
+    padding-bottom: 0px;
+}
+thead { display:table-header-group }
+tfoot { display:table-footer-group; }
+.bg_download{
+	margin-top:3%;
+	background-image: url('teacher/assets/img/navbar/logopdf.png');
+	background-repeat: no-repeat;
+	background-position: center;
+    background-size: 100% auto;
+	height:40vh;
+}
+.label{
+	font-weight: 600;
+	font-size: 13px;
+	margin:0;
+}
+.ul_sdg,.ul_boc{
+	padding-left:20px;
+}
+.content_res{
+	margin:0;
+	padding-top:1%;
+	padding-bottom: 1%;
+}
+.boc p{
+	margin:0;
+}
+p{
+	font-size:11px;
+}
+.bg_ivory{
+	margin: -1px -15px 0px -15px !important;
+    background-color: rgb(240, 235, 225);
+    padding: 3px 15px 0px 15px !important;
+}
+.title_document{
+	font-size:25px;
+}
+.border_class_mission{
+	border:1px solid #dee2e6;
+	border-radius:5px;
+	margin-bottom:20px;
+}
+.div_detail{
+	margin:0;
+}
+@page {
+	@bottom-right {
+		content: counter(page) ' of ' counter(pages);
+		font-size: 8px;
+	}
+	@bottom-left {
+		content: '';
+		font-size: 8px;
+	}
+	size: A3;
+	margin: 15mm;
+}

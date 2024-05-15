@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="547" height="623" viewBox="0 0 547 623">
+  <defs>
+    <filter id="kotakputihlogin" x="0" y="0" width="547" height="623" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feFlood flood-opacity="0.031"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#kotakputihlogin)">
+    <path id="kotakputihlogin-2" data-name="kotakputihlogin" d="M5,0H487a0,0,0,0,1,0,0V558a5,5,0,0,1-5,5H5a5,5,0,0,1-5-5V5A5,5,0,0,1,5,0Z" transform="translate(30 27)" fill="#fff"/>
+  </g>
+</svg>
