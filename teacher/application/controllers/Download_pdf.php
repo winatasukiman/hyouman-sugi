@@ -236,8 +236,44 @@ class download_pdf extends CI_Controller {
 		}
 	}
 
+	function multi_unique_array($arr, $key) {
+		$Myarray = array();
+		$i = 0;
+		$array_of_keys = array();
+		foreach($arr as $val) {
+		if (!in_array($val->$key, $array_of_keys)) {
+			$array_of_keys[$i] = $val->$key;
+			$Myarray[$i] = $val;
+		}
+		$i++;
+		}
+		return $Myarray;
+	}
+
+	function orderBy($items, $attr, $order){
+		$sortedItems = array();
+		#iterating over the arr
+		foreach ($items as $key => $val)
+		{
+			#storing the key of the names array as the Name key of the arr
+			$sortedItems[$key] = $val->$attr;
+			
+		}
+		#apply multisort method
+		if ($order === 'desc'){
+			array_multisort($sortedItems, SORT_DESC, $items);
+		} else{
+			array_multisort($sortedItems, SORT_ASC, $items);
+		}
+		return $items;
+	}
+
 	public function promes($academy_year,$grade_subject,$semester) {
 		$class_detail = array();
+		// persiapan untuk document converter format baru
+		$comp_cambridge = [];
+		$comp_k13 = [];
+		$comp_merdeka = [];
 		$sql = $this->class_model->get_class_for_download($academy_year,$grade_subject,$semester);
 		if ($sql->num_rows() > 0) {
 			$class_detail = $sql->result();
@@ -311,16 +347,19 @@ class download_pdf extends CI_Controller {
 						$sql = $this->class_model->get_class_mission_competencies_cambridge_by_class_mission_id($cm->class_mission_id);
 						if ($sql->num_rows() > 0) {
 							$cm->class_mission_competencies_cambridge = $sql->result();
+							$comp_cambridge = array_merge($comp_cambridge, $sql->result());
 						}
 	
 						$sql = $this->class_model->get_class_mission_competencies_k13_by_class_mission_id($cm->class_mission_id);
 						if ($sql->num_rows() > 0) {
 							$cm->class_mission_competencies_k13 = $sql->result();
+							$comp_k13 = array_merge($comp_k13, $sql->result());
 						}
 	
 						$sql = $this->class_model->get_class_mission_competencies_merdeka_by_class_mission_id($cm->class_mission_id);
 						if ($sql->num_rows() > 0) {
 							$cm->class_mission_competencies_merdeka = $sql->result();
+							$comp_merdeka = array_merge($comp_merdeka, $sql->result());
 						}
 					}
 					$total_jp = 0;
@@ -336,7 +375,16 @@ class download_pdf extends CI_Controller {
 			$this->session->set_flashdata('category_error', 'Data not found');
 			redirect('classes');
 		}
-		
+		// persiapan untuk document converter format baru
+		$comp_cambridge_ordered = $this->orderBy($comp_cambridge,"subject_id","asc");
+		$comp_cambridge = $this->multi_unique_array($comp_cambridge_ordered,"competencies_cambridge_id");
+		$comp_k13_ordered = $this->orderBy($comp_k13,"subject_id","asc");
+		$comp_k13 = $this->multi_unique_array($comp_k13_ordered,"competencies_cambridge_id");
+		$comp_merdeka_ordered = $this->orderBy($comp_merdeka,"subject_id","asc");
+		$comp_merdeka = $this->multi_unique_array($comp_merdeka_ordered,"competencies_cambridge_id");
+		foreach($comp_cambridge as $cb){
+			echo json_encode($cb->competencies_cambridge_id);
+		}
 		$data = array(
 			"detail" => $class_detail,
 			"title"=> $class_detail[0]->subject_name." ".$class_detail[0]->grade_name." ".$class_detail[0]->academy_year_name." ".$class_detail[0]->semester_name,

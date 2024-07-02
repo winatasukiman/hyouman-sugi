@@ -525,7 +525,7 @@
 								<p class="label bg_ivory" style="margin:0;">Teacher's Reflection</p>
 							</div>
 							<div class="col-md-12 col-12">
-								<p><?= htmlspecialchars($cm->refleksi_guru) ?></p>
+								<p><?php if($cm->refleksi_guru == ""){ echo "<br>";}else{ echo nl2br($cm->refleksi_guru); } ?></p>
 							</div>
 						</div>
 						<!-- ketercapaian tujuan pembelajaran -->

@@ -59,7 +59,7 @@
 				<p class="label month" style="margin-top:30px;"><?=strtoupper($cm->mission_month)?></p>
 				<?php foreach($detail as $c2){ 
 					foreach($c2->class_mission as $cm2){
-						if($cm2->mission_month == $cm->mission_month){ ?>
+						if($cm2->mission_month == $cm->mission_month && $cm2->mission_title == $cm->mission_title){ ?>
 						<div class="row" style="margin-top:30px;">
 							<div class="col-md-12 col-12">
 								<div class="table-responsive">
@@ -84,35 +84,6 @@
 								</div>
 							</div>
 						</div>
-						<?php if($detail[0]->curicullum_id == 1){ ?>
-						<!-- learning objectives -->
-						<div class="row">
-							<div class="col-md-12 col-12">
-								<div class="table-responsive">
-									<table class="table table-bordered">
-										<thead>
-											<tr class="bg_ivory">
-												<th scope="col">Learning Objectives</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="align-top">
-												<td>
-													<ul class="ul_sdg">
-														<?php foreach ($cm2->class_mission_learning_objectives as $cmlo) {
-															if($cmlo->name != ""){ ?>
-															<li><?=$cmlo->name?></li>
-														<?php }
-														}?>
-													</ul>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>	
-							</div>
-						</div>
-						<?php } ?>
 						<!-- competencies / capaian pembelajaran -->
 						<div class="row">
 							<div class="col-md-12 col-12">
@@ -135,7 +106,7 @@
 													<div class="boc" style="padding:0;"><?=$cm2->bank_of_competencies?></div>
 													<!-- competencies cambridge -->
 													<?php $subject_id = "";
-															foreach ($cm2->class_mission_competencies_cambridge as $res) {
+															foreach ($cm2->class_mission_competencies_cambridge as $res) {echo json_encode($res);
 																if($res->subject_id != $subject_id){ ?>
 																<li><?= $res->subject_name ?></li>
 																	<ul class="detail_meeting m-0">
