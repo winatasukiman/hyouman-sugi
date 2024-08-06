@@ -73,8 +73,8 @@
 							</div>
 							<div class="col-md-3 col-3" style="margin-top:0.2%;padding-left: 0px;">
 								<p style="margin:0;"><?= $detail->school_name ?></p>
-								<p style="margin:0;padding-top:4px;"><?=$detail->term_name?> / <?=$cm->week?></p>
-								<p style="margin:0;padding-top:3px;"><?=$cm->day?> / <?=$cm->publish_date?>, <?=$cm->publish_time?></p>
+								<p style="margin:0;padding-top:4px;visibility:hidden"><?=$detail->term_name?> / <?=$cm->week?></p>
+								<p style="margin:0;padding-top:3px;visibility:hidden"><?=$cm->day?> / <?=$cm->publish_date?>, <?=$cm->publish_time?></p>
 								<p style="margin:0;padding-top:3px;"><?=$cm->time_allocation_a?>x<?=$cm->time_allocation_b?> Minutes</p>
 							</div>
 							<?php if($detail->subject_parent_id != 4){ ?>
